@@ -1,0 +1,27 @@
+.btnthem{
+    margin-left: 33%;
+    margin-top: 3%;
+    background-color: black;
+    color: yellow;
+}
+.btnthem2{
+    margin-left: 1%;
+    margin-top: 3%;
+    color: red;
+}
+
+.row{
+    text-align: left;
+}
+.btnedit{
+margin-left: 0%;
+color: yellow;
+background-color: black;
+border: 1px solid black;
+}
+.btndelete{
+    color: white;
+    background-color: red;
+    border: 1px solid red;
+}
+

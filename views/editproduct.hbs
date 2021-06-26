@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Edit</h2>
+        <br>
+        <form action="/products/editproduct/{{product._id}}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="maso">Ma So:</label>
+                <input type="text" class="form-control" id="maso" placeholder="Enter maso" name="maso"
+                    value="{{product.maso}}">
+            </div>
+            <div class="form-group">
+                <label for="name">Tên Sản Phẩm:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter product name" name="name"
+                    value="{{product.name}}">
+            </div>
+            <div class="form-group">
+                <label for="price">Giá:</label>
+                <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price"
+                    value="{{product.price}}">
+            </div>
+            <div class="form-group">
+                <label for="ngay">Ngày:</label>
+                <input type="date" class="form-control" id="ngay" placeholder="Enter product name" name="ngay"
+                    value="{{formatDate product.ngay}}">
+            </div>
+            <div class="form-group">
+                <label for="sanpham">Loại</label>
+                <select class="form-control" id="sanpham" name="sanpham">
+
+                    {{#each loaiSP}}
+                    {{#if (soSanh this._id ../product.sanpham)}}
+                    <option selected value="{{this._id}}">{{this.name}}</option>
+                    {{else}}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/if}}
+                    {{/each}}
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="img">Ảnh:</label>
+                <input type="file" required class="form-control" placeholder="Enter image" id="img" name="img">
+            </div>
+            <div>
+                <img width="100" height="50" id="showimg" src="http://localhost:3000/images/{{product.img}}">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">submit</button>
+        </form>
+    </div>
+
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#showimg').attr('src', e.target.result);
+                    $('#showimg').removeClass("d-none");
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#img").change(function () {
+            readURL(this);
+        });
+    </script>
+
+</body>
+
+</html>
